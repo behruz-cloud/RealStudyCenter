@@ -12,4 +12,16 @@ public class Module {
     private String name;
     @ManyToOne
     private Course course;
+
+    public Module(Course course,String name) {
+        this.name = name;
+        this.course = course;
+    }
+
+    public Module() {
+    }
+
+    public Module(String name) {
+        this.name = name;
+    }
 }

@@ -23,16 +23,25 @@ public class CourserRepo {
     public static List<Object[]> getReport() {
         try (EntityManager em = EMF.createEntityManager()) {
             String query = """
-                select c.name, count(s.id), sum(s.amount)
-                from Course c
-                         join Module m on m.course = c
-                         join Groups g on g.module = m
-                         join Student s on s.groups = g
-                group by c.name
-                """;
+                    select c.name, count(s.id), sum(s.amount)
+                    from Course c
+                             join Module m on m.course = c
+                             join Groups g on g.module = m
+                             join Student s on s.groups = g
+                    group by c.name
+                    """;
 
             return em.createQuery(query, Object[].class).getResultList();
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }}
+        }
+    }
+
+    public static Course getById(int courseId) {
+        try (EntityManager em = EMF.createEntityManager()) {
+            return em.find(Course.class, courseId);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

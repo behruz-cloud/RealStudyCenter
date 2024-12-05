@@ -1,3 +1,4 @@
+<%@ page import="uz.pdp.study_center.entity.Student" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,12 +54,13 @@
 <body>
 <div class="container">
     <%
-        String courseId = request.getParameter("courseId");
+        Student student = (Student) request.getSession().getAttribute("student");
+        Integer groupId = student.getGroups().getId();
     %>
-    <h1>Add Module Successfully Completed!</h1>
-    <p>Thank you for your add module!</p>
-    <form action="/Module.jsp" method="post">
-    <input type="hidden" name="courseId" value="<%=courseId%>">
+    <h1>Payment Successfully Completed!</h1>
+    <p>Thank you for your payment!</p>
+    <form action="/Students.jsp" method="post">
+        <input type="hidden" name="groupId" value="<%=groupId%>">
         <button type="submit">Go Back</button>
     </form>
 </div>
